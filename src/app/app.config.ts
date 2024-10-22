@@ -7,3 +7,9 @@ import { provideClientHydration } from '@angular/platform-browser';
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes), provideClientHydration()]
 };
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080/'  // Example API base URL for Spring Boot
+};
+
+
