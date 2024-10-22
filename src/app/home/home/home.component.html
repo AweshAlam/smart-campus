@@ -1,0 +1,55 @@
+<header class="header">
+  Smart Campus Surveillance and Guidance System
+</header>
+
+<nav>
+  <ul>
+    <li><a routerLink="/">Home</a></li>
+    <li><a routerLink="/features">Features</a></li>
+    <li><a routerLink="/about">About</a></li>
+    <li><a routerLink="/contact">Contact</a></li>
+  </ul>
+  <div class="nav-buttons">
+    <a (click)="redirectToAdminLogin()" class="btn">Admin Login</a>
+    <a (click)="redirectToLogin()" class="btn">Student Login</a>
+  </div>
+</nav>
+
+<div class="container">
+  <section id="home">
+    <h2>Welcome to Smart Campus Surveillance and Guidance System</h2>
+    <p>Ensuring safety and improving guidance for students through advanced technology.</p>
+  </section>
+
+  <section id="features">
+    <h2>Key Features</h2>
+    <div class="feature-card">
+      <div class="feature">
+        <img src="assets/cctv.png" alt="cctv" width="50px">
+        <h3>Live Feed</h3>
+        <p>Monitor the campus in real-time with our live feed system integrated with facial recognition technology.</p>
+      </div>
+
+      <div class="feature">
+        <img src="assets/student.png" alt="student" width="50px">
+        <h3>Student Registration</h3>
+        <p>Easily register students with facial recognition technology.</p>
+      </div>
+
+      <div class="feature">
+        <img src="assets/schedule.png" alt="schedule" width="50px">
+        <h3>Timetable Management</h3>
+        <p>Manage and monitor student to provide guidance based on their timetables.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About the System</h2>
+    <p>The Smart Campus Surveillance and Guidance System uses cutting-edge AI and machine learning algorithms to ensure campus safety, guide students, and streamline administrative processes.</p>
+  </section>
+</div>
+
+<footer>
+  &copy; 2024 Smart Campus Surveillance and Guidance System. All rights reserved.
+</footer>

@@ -1,0 +1,22 @@
+<div class="student-dashboard">
+    <header>
+      <h1>Welcome, {{ student.s_name }}</h1>
+      <p>Your Registration Number: {{ student.reg_no }}</p>
+    </header>
+  
+    <nav>
+      <ul>
+        <li><a routerLink="/student/timetable">View Timetable</a></li>
+        <li><a routerLink="/student/notifications">Notifications</a></li>
+        <li><a routerLink="/student/profile">Profile Settings</a></li>
+        <li><a (click)="logout()">Logout</a></li>
+      </ul>
+    </nav>
+  
+    <div class="content">
+      <h2>Dashboard Overview</h2>
+      <p>Here you can view your attendance, check your timetable, and manage your profile.</p>
+  
+    </div>
+  </div>
+  
