@@ -18,6 +18,7 @@ export class StudentDashboardComponent {
   }
 
   getStudentData() {
+    const reg_no = localStorage.getItem('username')
     this.http.get(`${environment.apiUrl}student/{reg_no}`).subscribe({
       next: (response: any) => {
         this.student = response;

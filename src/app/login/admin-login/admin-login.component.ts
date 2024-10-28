@@ -17,15 +17,19 @@ export class AdminLoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login() {
-    if (this.username === 'admin' && this.password === '12345') {
-      this.router.navigate(['/admin']);
-    } else {
-      this.errorMessage = 'Invalid login credentials';
-    }
+    const credentials = { username: this.username, password: this.password };
 
-    console.log('Username:', this.username, 'Password:', this.password);
+    this.http.post(`${environment.apiUrl}login`, credentials).subscribe({
+      next: (response) => {
+        this.router.navigate(['/admin']);
+      },
+      error: (err) => {
+        this.errorMessage = 'Invalid login credentials';
+      }
+    });
+    console.log(this.username,this.password);
   }
 }
