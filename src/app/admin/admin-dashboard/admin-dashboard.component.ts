@@ -13,7 +13,8 @@ export class AdminDashboardComponent {
   constructor(private router: Router) {}
 
   logout() {
-    this.router.navigate(['/admin-login']);
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
   }
   register() {
     this.router.navigate(['/admin/student/register']);

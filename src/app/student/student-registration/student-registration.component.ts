@@ -18,6 +18,7 @@ export class StudentRegistrationComponent {
   email: string = '';
   mob_no: string = '';
   errorMessage: string = '';
+   apiUrl = "http://localhost:8080/admin/student/register"
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -29,7 +30,7 @@ export class StudentRegistrationComponent {
       mob_no: this.mob_no,
     };
 
-    this.http.post(`${environment.apiUrl}admin/student/register`, studentData).subscribe({
+    this.http.post(`this.apiUrl`, studentData).subscribe({
       next: (response) => {
         console.log(response);
         // this.router.navigate(['/admin/student/register']);
