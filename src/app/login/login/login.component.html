@@ -13,11 +13,14 @@
   
     <!-- <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div> -->
   <!-- </div> -->
+  <div class="login-container">
+  <img src="assets/cctv2.png" alt="cctv" width="100px">
+  <h2>Login</h2>
   <form (ngSubmit)="onSubmit()">
     <div class="box">
       <div class="user">
         <div class="mb-3">
-          <label for="username" class="form-label">Login Page</label>
+          <label for="username" class="form-label">Username</label>
           <input
             type="text"
             class="form-control"
@@ -41,6 +44,6 @@
           />
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary">Login</button>
     </div>
   </form>

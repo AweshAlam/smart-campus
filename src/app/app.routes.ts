@@ -6,11 +6,13 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { AdminLoginComponent } from './login/admin-login/admin-login.component';
 import { StudentDashboardComponent } from './student/student-dashboard/student-dashboard.component';
 import { AuthGuard } from './auth.guard';
+import { StudentListComponent } from './admin/student-list/student-list.component';
 export const routes: Routes = [
   { path: '', redirectTo:'home', pathMatch:'full'},
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'admin/student/register', component: StudentRegistrationComponent },
+  { path: 'student-list', component: StudentListComponent},
   { path: 'admin', component: AdminDashboardComponent,canActivate: [AuthGuard], data: { role: 'ROLE_ADMIN' } },
   { path: 'admin-login', component:AdminLoginComponent,},
   { path: 'student', component: StudentDashboardComponent,canActivate: [AuthGuard], data: { role: 'ROLE_STUDENT'}},

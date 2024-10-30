@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  url = "http://localhost:8080/auth/login"
+  url = "http://localhost:8080/login"
   constructor(private http:HttpClient) { }
 
   doLogin(credentials: { username: string; password: string }): Observable<any> {

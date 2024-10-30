@@ -19,4 +19,7 @@ export class AdminDashboardComponent {
   register() {
     this.router.navigate(['/admin/student/register']);
   }
+  list() {
+    this.router.navigate(['student-list']);
+  }
 }
