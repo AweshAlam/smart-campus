@@ -1,122 +1,135 @@
-/* Styling for the login container */
+/* Login Container Styles */
 .login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f4f4f4;
-}
-
-h2 {
-    font-size: 24px;
-    color: #3498db;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-/* Form styling */
-form {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    width: 100%;
     max-width: 400px;
-}
-
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 18px;
-    color: #34495e;
-}
-
-input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-input:focus {
-    outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-}
-
-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #3498db;
-    border: none;
-    color: white;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
+    margin: 50px auto;
+    padding: 30px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    backdrop-filter: blur(10px);
     position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-button:before {
+  }
+  
+  /* Header Image */
+  .login-container img {
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-out;
+  }
+  
+  /* Form Header */
+  .login-container h2 {
+    font-size: 24px;
+    color: #2d3748;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 12px;
+  }
+  
+  .login-container h2::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: -100%;
-    width: 300%;
-    height: 300%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: skewX(-45deg);
-    z-index: 0;
-    transition: all 0.4s ease-in-out;
-    opacity: 0;
-}
-
-button:hover {
-    background-color: #2980b9;
-}
-
-button:hover:before {
-    left: 100%;
-    opacity: 1;
-    transition: all 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-button:active {
-    background-color: #1c6694;
-}
-
-button:focus {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(to right, #4299e1, #48bb78);
+  }
+  
+  /* Form Styles */
+  .login-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .box {
+    width: 100%;
+  }
+  
+  /* Input Fields */
+  .form-control,
+  .btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+  
+  .form-control {
+    margin-top: 8px;
+    border: 1px solid rgba(66, 153, 225, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .form-control:focus {
+    border-color: #4299e1;
+    box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
     outline: none;
-}
-
-/* Optional: Adding glow effect */
-button:hover {
-    box-shadow: 0 0 20px rgba(52, 152, 219, 0.7), 0 0 40px rgba(52, 152, 219, 0.5);
-}
-
-
-
-/* Error message styling */
-.error {
-    color: red;
-    font-size: 14px;
-    margin-top: 15px;
-    text-align: center;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 500px) {
-    form {
-        padding: 20px;
+  }
+  
+  /* Form Labels */
+  .form-label {
+    font-size: 16px;
+    color: #4a5568;
+    text-align: left;
+    display: block;
+    margin-bottom: 4px;
+  }
+  
+  /* Submit Button */
+  .btn-primary {
+    background: linear-gradient(135deg, #4299e1, #2b6cb0);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-top: 12px; /* Add space between fields and button */
+  }
+  
+  .btn-primary:hover {
+    box-shadow: 0 8px 20px rgba(66, 153, 225, 0.4);
+    transform: translateY(-2px);
+  }
+  
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: 0.6s;
+  }
+  
+  .btn-primary:hover::before {
+    left: 100%;
+  }
+  
+  .btn-primary:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 12px rgba(66, 153, 225, 0.35);
+  }
+  
+  /* Animation for Image */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
     }
-
-    button {
-        font-size: 14px;
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
-}
+  }
+  

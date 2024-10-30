@@ -13,7 +13,7 @@ import { environment } from '../../app.config';
 export class StudentDashboardComponent {
   student: any = {};
 
-  apiUrl = "http://localhost:8080"
+  apiUrl = "http://localhost:8080/student/{reg_no}"
 
   constructor(private http: HttpClient, private router: Router) {
     this.getStudentData();
@@ -21,7 +21,7 @@ export class StudentDashboardComponent {
 
   getStudentData() {
     const reg_no = localStorage.getItem('username')
-    this.http.get(`apiUrl/student/{reg_no}`).subscribe({
+    this.http.get(`this.apiUrl`).subscribe({
       next: (response: any) => {
         this.student = response;
       },
