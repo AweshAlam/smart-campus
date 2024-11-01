@@ -26,7 +26,7 @@ export class StudentListComponent {
 
   fetchStudents(): void {
     this.http.get<Student[]>(this.apiUrl).subscribe(
-      (data: Student[]) => this.students = data,
+      (data: Student[]) => {this.students = data},
       error => console.error('Error fetching students', error)
     );
   }
