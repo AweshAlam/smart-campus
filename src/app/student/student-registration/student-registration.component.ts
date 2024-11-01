@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../app.config';
+import { StudentRegistrationService } from '../../../../service/student-registration.service';
 
 @Component({
   selector: 'app-student-registration',
@@ -13,33 +14,37 @@ import { environment } from '../../app.config';
   imports: [FormsModule, HttpClientModule, CommonModule]
 })
 export class StudentRegistrationComponent {
-  reg_no: number | null = null;
+  reg_no: string ='';
   s_name: string = '';
   email: string = '';
   mob_no: string = '';
+  password:string ='';
   errorMessage: string = '';
-   apiUrl = "http://localhost:8080/admin/student/register"
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private registerService: StudentRegistrationService,
+    private router: Router
+  ) {}
 
   register() {
-    let studentData = {
+    const studentData = {
       reg_no: this.reg_no,
       s_name: this.s_name,
       email: this.email,
       mob_no: this.mob_no,
+      password: this.password,
     };
 
-    this.http.post(`this.apiUrl`, studentData).subscribe({
-      next: (response) => {
-        console.log(response);
-        // this.router.navigate(['/admin/student/register']);
-        alert("Student Registered Successfully.")
+    this.registerService.registerStudent(studentData).subscribe({
+      next: () => {
+        alert("Student Registered Successfully.");
+        this.router.navigate(['/login']); // Navigate to login on successful registration
       },
-      error: (err) => {
-        console.error(err);
+      error: (error) => {
+        console.error('Registration error: ', error);
+        console.error('Authorization header was:', localStorage.getItem('token'));
         this.errorMessage = 'Registration failed. Please try again.';
-      }
+    }
     });
   }
 }

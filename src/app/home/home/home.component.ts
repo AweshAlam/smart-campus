@@ -12,9 +12,9 @@ import { LoginComponent } from "../../login/login/login.component";
 export class HomeComponent {
   constructor(private router: Router) {}
 
-  redirectToAdminLogin() {
-    this.router.navigate(['admin-login']);
-  }
+  // redirectToAdminLogin() {
+  //   this.router.navigate(['admin-login']);
+  // }
   redirectToLogin() {
     this.router.navigate(['login']);
   }

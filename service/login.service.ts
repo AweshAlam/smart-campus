@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  url = "http://localhost:8080/login"
+  url = "http://localhost:8080/auth/login"
   constructor(private http:HttpClient) { }
 
   doLogin(credentials: { username: string; password: string }): Observable<any> {
@@ -45,7 +45,7 @@ export class LoginService {
       return null;
     }
   
-    // Verify token structure to avoid decoding invalid tokens
+    
     const tokenParts = token.split('.');
     if (tokenParts.length !== 3) {
       console.error("Invalid token structure: expected 3 parts, found", tokenParts.length);
@@ -60,4 +60,13 @@ export class LoginService {
       return null;
     }
   }
+
+  getToken():any{
+    let token = localStorage.getItem('token');
+    return true;
+  }
 }
+
+
+
+
