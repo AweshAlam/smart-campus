@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { Router,RouterOutlet,RouterLink } from '@angular/router';
 
 @Component({
@@ -12,16 +12,38 @@ export class AdminDashboardComponent {
   noStudents = 0;
   noCameras = 0;
   noSchedules = 0;
-  constructor(private router: Router) {}
+
+  @ViewChild('videoElement', { static: false }) videoElement!: ElementRef<HTMLVideoElement>;
+
+  constructor(private router: Router) {
+    this.startCamera();
+  }
+
+  startCamera() {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          this.videoElement.nativeElement.srcObject = stream;
+        })
+        .catch((error) => {
+          console.error('Error accessing camera:', error);
+        });
+    } else {
+      console.error('Camera not supported on this browser.');
+    }
+  }
 
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }
-  register() {
-    this.router.navigate(['/admin/student/register']);
+
+  dashboard() {
+    this.router.navigate(['admin']);
   }
-  list() {
-    this.router.navigate(['student-list']);
+
+  classes() {
+    this.router.navigate(['admin/classes']);
   }
 }
