@@ -30,7 +30,7 @@ export class LoginComponent {
                 console.log("Full Response:", response); // Log full response
                 const token = response.jwtToken; // Access the token correctly
                 console.log("Token:", token); // Now this should log the actual token
-                    this.loginService.loginUser(token); 
+                    this.loginService.loginUser(token, this.credentials.username);
                     const role = this.loginService.getRoleFromToken();
                      console.log("Role from token:", role);
                      if (role) {
