@@ -1,61 +1,71 @@
-<nav class="navbar">
-  <ul>
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/features">Features</a></li>
-    <li><a routerLink="/about">About</a></li>
-    <li><a routerLink="/contact">Contact</a></li>
-  </ul>
-  <div class="nav-buttons">
-    <a (click)="redirectToLogin()" class="btn">Login</a>
+<div id="home">
+  <nav class="navbar">
+    <ul>
+      <li><a (click)="scrollToHome()">home</a></li> <!-- Scrolls to home section -->
+      <li><a (click)="scrollToFeatures()">features</a></li> 
+      <li><a (click)="scrollToAbout()">About</a></li> <!-- Scrolls to About section -->
+      <!-- <li><a routerLink="/contact">Contact</a></li> -->
+    </ul>
+    <div class="nav-buttons">
+      <a (click)="redirectToLogin()" class="btn">Login</a>
+    </div>
+  </nav>
+  
+  <header class="header">
+    Smart Campus Surveillance and Guidance System
+  </header>
+  
+  <div class="banner">
+    <h1>Welcome to Smart Campus Surveillance System</h1>
+    <p>Your trusted guide for enhanced campus safety and efficiency.</p>
   </div>
-</nav>
-
-<header class="header">
-  Smart Campus Surveillance and Guidance System
-</header>
-
-<div class="banner">
-  <h1>Welcome to Smart Campus Surveillance System</h1>
-  <p>Your trusted guide for enhanced campus safety and efficiency.</p>
+   
 </div>
 
-<div class="container">
-  <section id="features">
-    <h2>Key Features</h2>
-    <div class="feature-card">
-      <div class="feature1">
-        <h3>Live Feed</h3>
-        <div class="details">
-        <p>Monitor the campus in real-time with integrated facial recognition technology.</p>
-          <p>Real-time monitoring ensures safety and quick response across the campus.</p>
+<div id="featuresSec">
+  <div class="container">
+    <section id="features">
+      <h2 class="key-features"> KEY FEATURES</h2>
+      <div class="feature-card">
+        <div class="feature1">
+          <h3>Live Feed</h3>
+          <div class="details">
+          <p>Monitor the campus in real-time with integrated facial recognition technology.</p>
+            <p>Real-time monitoring ensures safety and quick response across the campus.</p>
+          </div>
+        </div>
+  
+        <div class="feature2">
+          <h3>Student Registration</h3>
+          <div class="details">
+          <p>Register students efficiently with advanced facial recognition.
+            Quick and accurate registration process with facial recognition for efficiency.</p>
+          </div>
+        </div>
+  
+        <div class="feature3">
+          <h3>Timetable Management</h3>
+          <div class="details">
+          <p>Provide guidance based on personalized timetables for students.</p>
+            <p>Personalized timetables to keep students on track and improve productivity.</p>
+          </div>
         </div>
       </div>
-
-      <div class="feature2">
-        <h3>Student Registration</h3>
-        <div class="details">
-        <p>Register students efficiently with advanced facial recognition.
-          Quick and accurate registration process with facial recognition for efficiency.</p>
-        </div>
-      </div>
-
-      <div class="feature3">
-        <h3>Timetable Management</h3>
-        <div class="details">
-        <p>Provide guidance based on personalized timetables for students.</p>
-          <p>Personalized timetables to keep students on track and improve productivity.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  
+</div>
 
   <section id="about">
-    <h2>About the System</h2>
-    <p>
-      Our system employs cutting-edge AI to ensure campus security, guide students, and streamline
-      administrative tasks. Experience seamless and effective campus management with our integrated
-      technology.
-    </p>
+    <h2>About the Smart Campus Surveillance-Based Guidance System</h2>
+    <p>The <strong>Smart Campus Surveillance-Based Guidance System</strong> is an innovative solution designed to enhance the safety and efficiency of university campuses. By integrating advanced technologies such as facial recognition, real-time video processing, and automated alert systems, this system provides a comprehensive approach to campus security and student management.</p>
+  
+    <h3>Key Objectives:</h3>
+    <ul>
+      <li><strong>Enhanced Security:</strong> The system tracks only students with verified identities, significantly improving campus security and preventing unauthorized access.</li>
+      <li><strong>Real-Time Monitoring:</strong> Utilizing strategically placed IP cameras, the system continuously monitors student movements, allowing for swift action in case of emergencies.</li>
+      <li><strong>Guidance for Students:</strong> Students receive audio instructions to guide them back to their classrooms if they are found in unauthorized areas.</li>
+      <li><strong>User-Friendly Navigation:</strong> The system offers intuitive navigation features, helping students manage their time better.</li>
+    </ul>
   </section>
 </div>
 

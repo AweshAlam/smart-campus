@@ -12,6 +12,28 @@ import { LoginComponent } from "../../login/login/login.component";
 export class HomeComponent {
   constructor(private router: Router) {}
 
+  scrollToAbout() {
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  scrollToHome() {
+    const homeSection = document.getElementById('home');
+    if (homeSection) {
+      homeSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  scrollToFeatures() {
+    const featuresSection = document.getElementById('featuresSec');
+    if (featuresSection) {
+      featuresSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+
   redirectToAdminLogin() {
     this.router.navigate(['admin-login']);
   }
