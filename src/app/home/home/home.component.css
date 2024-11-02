@@ -151,6 +151,7 @@ font-size: 1.3rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   background: url(/assets/reg.jpeg) no-repeat center center/cover;
+  background: url(/assets/sec.jpg) no-repeat center center/cover;
 
 }.feature3 {
   background: #edf2f7;
@@ -161,7 +162,7 @@ font-size: 1.3rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   background: url(/assets/time.jpeg) no-repeat center center/cover;
-
+  background: url(/assets/welcome.jpeg) no-repeat center center/cover;
 }
 
 .feature:hover {

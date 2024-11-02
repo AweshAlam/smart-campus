@@ -1,33 +1,69 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { StudentService } from '../../../../service/student.service';
 import { CommonModule } from '@angular/common';
-
-interface Student {
-  id: string;
-  name: string;
-  registrationNumber: string;
-  branch: string;
-}
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.css'],
-  standalone: true,
-  imports: [CommonModule]
+  imports: [CommonModule,FormsModule],
+  standalone: true
 })
-export class StudentListComponent {
-  students: Student[] = [];
-  private apiUrl = 'http://localhost:8080/admin/students'; // Replace with your actual backend URL
+export class StudentListComponent implements OnInit {
+  students: any[] = [];
+  editingStudent: any = null;
 
-  constructor(private http: HttpClient) {    
+  constructor(private studentService: StudentService) {}
+
+  ngOnInit(): void {
     this.fetchStudents();
   }
 
   fetchStudents(): void {
-    this.http.get<Student[]>(this.apiUrl).subscribe(
-      (data: Student[]) => this.students = data,
-      error => console.error('Error fetching students', error)
-    );
+    this.studentService.getStudents().subscribe({
+      next: (data) => {
+        this.students = data;
+        console.log('Student list loaded:', data);
+      },
+      error: (error) => {
+        console.error('Error fetching student list:', error);
+      }
+    });
+  }
+
+  editStudent(student: any): void {
+    this.editingStudent = { ...student };
+  }
+
+  updateStudent(): void {
+    if (this.editingStudent) {
+      this.studentService.updateStudent(this.editingStudent.reg_no, this.editingStudent).subscribe({
+        next: () => {
+          console.log('Student updated successfully');
+          this.editingStudent = null;
+          this.fetchStudents(); 
+        },
+        error: (error) => {
+          console.error('Error updating student:', error);
+        }
+      });
+    }
+  }
+
+  cancelEdit(): void {
+    this.editingStudent = null;
+  }
+
+  deleteStudent(reg_no: string): void {
+    this.studentService.deleteStudent(reg_no).subscribe({
+      next: () => {
+        console.log(`Student with ID ${reg_no} deleted successfully`);
+        this.fetchStudents();
+      },
+      error: (error) => {
+        console.error(`Error deleting student with ID ${reg_no}:`, error);
+      }
+    });
   }
 }

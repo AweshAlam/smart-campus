@@ -1,23 +1,54 @@
-<!-- src/app/components/student-list/student-list.component.html -->
-<div class="container">
-    <h2>Student List</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Registration Number</th>
-          <th>Branch</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let student of students">
-          <td>{{ student.id }}</td>
-          <td>{{ student.name }}</td>
-          <td>{{ student.registrationNumber }}</td>
-          <td>{{ student.branch }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+<div *ngIf="students && students.length; else noStudents">
+  <h2>Student List</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Registration No</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Mobile No</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.reg_no }}</td>
+        <td>{{ student.s_name }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.mob_no }}</td>
+        <td>
+          <button (click)="editStudent(student)">Update</button>
+          <button (click)="deleteStudent(student.reg_no)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="editingStudent">
+  <h3>Edit Student</h3>
+  <form (ngSubmit)="updateStudent()">
+    <label>
+      Registration No:
+      <input [(ngModel)]="editingStudent.reg_no" name="reg_no" required />
+    </label>
+    <label>
+      Name:
+      <input [(ngModel)]="editingStudent.s_name" name="s_name" required />
+    </label>
+    <label>
+      Email:
+      <input [(ngModel)]="editingStudent.email" name="email" required />
+    </label>
+    <label>
+      Mobile No:
+      <input [(ngModel)]="editingStudent.mob_no" name="mob_no" required />
+    </label>
+    <button type="submit">Save</button>
+    <button type="button" (click)="cancelEdit()">Cancel</button>
+  </form>
+</div>
+
+<ng-template #noStudents>
+  <p>No students found.</p>
+</ng-template>

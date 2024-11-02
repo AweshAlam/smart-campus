@@ -1,98 +1,91 @@
-/* Base styles */
-body {
-  font-family: 'Inter', Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f7fa;
-  color: #2d3748;
-}
-
+/* Dashboard main container */
 .dashboard {
-  max-width: 1000px;
-  margin: 20px auto;
+  max-width: 1200px;
+  margin: 40px auto;
   padding: 20px;
   background: #fff;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-.dashboard h1 {
   text-align: center;
-  font-size: 28px;
-  color: #1a365d;
-  margin-bottom: 20px;
 }
 
-/* Navigation styling */
-nav {
-  display: flex;
-  justify-content: center;
+/* Dashboard heading */
+.dashboard h1 {
+  font-size: 2.5em;
+  color: #2d3748;
   margin-bottom: 20px;
+  text-shadow: 1px 1px 2px #B9E5E8;
 }
 
-nav ul {
+/* Dashboard navigation */
+.dashboard nav ul {
   list-style: none;
   padding: 0;
   display: flex;
-  gap: 20px;
+  justify-content: space-around;
+  margin-bottom: 30px;
 }
 
-nav ul li {
-  display: inline;
+.dashboard nav ul li {
+  margin-right: 20px;
 }
 
-nav ul li a {
-  color: #2d3748;
-  text-decoration: none;
-  font-size: 16px;
-  padding: 10px 20px;
-  background-color: #edf2f7;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-  position: relative;
+.dashboard nav ul li:last-child {
+  margin-right: 0;
 }
 
-nav ul li a:hover {
-  background-color: #2b6cb0;
+.dashboard nav ul li button {
+  background: #2b6cb0;
   color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
-
-/* Content area styling */
-.content {
-  text-align: center;
-  padding: 20px;
-  background-color: #f7fafc;
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
-.content h2 {
-  font-size: 22px;
+.dashboard nav ul li button:hover {
+  background: #4299e1;
+  transform: translateY(-3px);
+}
+
+.dashboard nav ul li button.active {
+  background: #1a365d;
+}
+
+/* Dashboard content */
+.dashboard .content {
+  text-align: left;
+  padding: 20px;
+  background: #edf2f7;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard .content h2 {
   color: #2d3748;
+  font-size: 1.8em;
   margin-bottom: 10px;
 }
 
-.content p {
-  font-size: 16px;
+.dashboard .content p {
+  font-size: 1.2em;
   color: #4a5568;
-  line-height: 1.6;
 }
 
-/* Responsive Design */
+/* Media query for responsiveness */
 @media (max-width: 768px) {
-  nav ul {
+  .dashboard nav ul {
     flex-direction: column;
     align-items: center;
   }
 
-  nav ul li a {
-    padding: 8px 12px;
-    font-size: 14px;
+  .dashboard nav ul li {
+    margin: 10px 0;
   }
 
-  .dashboard h1 {
-    font-size: 24px;
+  .dashboard nav ul li button {
+    width: 100%;
   }
 }

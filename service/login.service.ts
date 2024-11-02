@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-// import { catchError, Observable, throwError } from 'rxjs';
 import { jwtDecode  } from 'jwt-decode';
 import { Observable } from 'rxjs';
 
@@ -16,9 +15,9 @@ export class LoginService {
     return this.http.post<any>(this.url, credentials);
   }
 
-  loginUser(token:any)
-  {
-    localStorage.setItem("token",token)
+  loginUser(token: string, username: string) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("username", username); // Set username in localStorage
     return true;
   }
 
@@ -45,7 +44,7 @@ export class LoginService {
       return null;
     }
   
-    // Verify token structure to avoid decoding invalid tokens
+    
     const tokenParts = token.split('.');
     if (tokenParts.length !== 3) {
       console.error("Invalid token structure: expected 3 parts, found", tokenParts.length);
@@ -60,4 +59,14 @@ export class LoginService {
       return null;
     }
   }
+
+  getToken():any{
+    let token = localStorage.getItem('token');
+    return true;
+  }
+
 }
+
+
+
+
