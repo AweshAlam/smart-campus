@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../app.config';
-import { StudentRegistrationService } from '../../../../service/student-registration.service';
+import { StudentService } from '../../../../service/student.service';
 
 @Component({
   selector: 'app-student-registration',
@@ -18,11 +18,10 @@ export class StudentRegistrationComponent {
   s_name: string = '';
   email: string = '';
   mob_no: string = '';
-  password:string ='';
   errorMessage: string = '';
 
   constructor(
-    private registerService: StudentRegistrationService,
+    private studentService: StudentService,
     private router: Router
   ) {}
 
@@ -32,13 +31,12 @@ export class StudentRegistrationComponent {
       s_name: this.s_name,
       email: this.email,
       mob_no: this.mob_no,
-      password: this.password,
     };
 
-    this.registerService.registerStudent(studentData).subscribe({
+    this.studentService.registerStudent(studentData).subscribe({
       next: () => {
         alert("Student Registered Successfully.");
-        this.router.navigate(['/login']); // Navigate to login on successful registration
+        this.router.navigate(['admin/student/register']); // Navigate to login on successful registration
       },
       error: (error) => {
         console.error('Registration error: ', error);

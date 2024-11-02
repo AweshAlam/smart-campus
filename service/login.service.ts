@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-// import { catchError, Observable, throwError } from 'rxjs';
 import { jwtDecode  } from 'jwt-decode';
 import { Observable } from 'rxjs';
 
@@ -9,16 +8,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LoginService {
-  url = "http://localhost:8080/auth/login"
+  url = "http://localhost:8080/login"
   constructor(private http:HttpClient) { }
 
   doLogin(credentials: { username: string; password: string }): Observable<any> {
     return this.http.post<any>(this.url, credentials);
   }
 
-  loginUser(token:any)
-  {
-    localStorage.setItem("token",token)
+  loginUser(token: string, username: string) {
+    localStorage.setItem("token", token);
+    localStorage.setItem("username", username); // Set username in localStorage
     return true;
   }
 
@@ -65,6 +64,7 @@ export class LoginService {
     let token = localStorage.getItem('token');
     return true;
   }
+
 }
 
 
