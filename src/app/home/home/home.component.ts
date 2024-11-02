@@ -34,9 +34,9 @@ export class HomeComponent {
   }
 
 
-  // redirectToAdminLogin() {
-  //   this.router.navigate(['admin-login']);
-  // }
+  redirectToAdminLogin() {
+    this.router.navigate(['admin-login']);
+  }
   redirectToLogin() {
     this.router.navigate(['login']);
   }
