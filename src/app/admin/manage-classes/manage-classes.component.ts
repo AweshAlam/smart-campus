@@ -7,19 +7,19 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-manage-classes',
   templateUrl: './manage-classes.component.html',
   styleUrls: ['./manage-classes.component.css'],
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule, FormsModule],
   standalone: true
 })
 export class ManageClassesComponent {
   classSchedules: any[] = [];
-  newClassSchedule = {cs_id:'', sec: '', day: '', time: '', subject: '' };
+  newClassSchedule = { id: '', day: '', subject: '', startTime: '', endTime: '' };
   editMode = false;
   editingClassSchedule: any = null;
 
   constructor(private classScheduleService: ClassScheduleService) {
     this.fetchClassSchedules();
-
   }
+
   fetchClassSchedules() {
     this.classScheduleService.getClassSchedules().subscribe({
       next: (data) => {
@@ -33,7 +33,7 @@ export class ManageClassesComponent {
     this.classScheduleService.createClassSchedule(this.newClassSchedule).subscribe({
       next: () => {
         this.fetchClassSchedules();
-        this.newClassSchedule = {cs_id:'', sec: '', day: '', time: '', subject: '' };
+        this.newClassSchedule = { id: '', day: '', subject: '', startTime: '', endTime: '' };
       },
       error: (err) => console.error('Error adding class schedule', err),
     });
@@ -42,23 +42,25 @@ export class ManageClassesComponent {
   startEdit(classSchedule: any) {
     this.editMode = true;
     this.editingClassSchedule = { ...classSchedule };
+    // Copy the edited schedule into the newClassSchedule form
+    this.newClassSchedule = { ...classSchedule };
   }
 
   updateClassSchedule() {
     this.classScheduleService
-      .updateClassSchedule(this.editingClassSchedule.cs_id, this.editingClassSchedule)
+      .updateClassSchedule(this.editingClassSchedule.id, this.newClassSchedule)
       .subscribe({
         next: () => {
           this.fetchClassSchedules();
           this.editMode = false;
-          this.editingClassSchedule = null;
+          this.newClassSchedule = { id: '', day: '', subject: '', startTime: '', endTime: '' };
         },
         error: (err) => console.error('Error updating class schedule', err),
       });
   }
 
-  deleteClassSchedule(cs_id: number) {
-    this.classScheduleService.deleteClassSchedule(cs_id).subscribe({
+  deleteClassSchedule(id: string) {
+    this.classScheduleService.deleteClassSchedule(id).subscribe({
       next: () => this.fetchClassSchedules(),
       error: (err) => console.error('Error deleting class schedule', err),
     });

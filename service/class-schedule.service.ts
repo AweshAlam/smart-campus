@@ -22,14 +22,14 @@ export class ClassScheduleService {
     });
   }
 
-  updateClassSchedule(cs_id: number, classSchedule: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/schedule/${cs_id}`, classSchedule, {
+  updateClassSchedule(id: string, classSchedule: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/schedule/${id}`, classSchedule, {
       headers: this.createHeaders(),
     });
   }
 
-  deleteClassSchedule(cs_id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/schedule/${cs_id}`, {
+  deleteClassSchedule(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/schedule/${id}`, {
       headers: this.createHeaders(),
     });
   }
