@@ -43,10 +43,23 @@
         <label>Mobile Number:</label>
         <input type="text" [(ngModel)]="mob_no" name="mob_no" required />
       </div>
+      
+      <div>
+        <h3>Select Schedules:</h3>
+        <div *ngFor="let schedule of schedules">
+          <label>
+            <input 
+              type="checkbox" 
+              [value]="schedule.id" 
+              (change)="onScheduleChange(schedule.id, $event)"
+            />
+            {{ schedule.subject }} - {{ schedule.day }} ({{ schedule.startTime }} to {{ schedule.endTime }})
+          </label>
+        </div>
+      </div>
+  
       <button type="submit">Register</button>
-      <div *ngIf="errorMessage">{{ errorMessage }}</div>
+      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
     </form>
   </div>
   
-  
-

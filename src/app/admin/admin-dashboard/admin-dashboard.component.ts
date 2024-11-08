@@ -13,26 +13,26 @@ export class AdminDashboardComponent {
   noCameras = 0;
   noSchedules = 0;
 
-  @ViewChild('videoElement', { static: false }) videoElement!: ElementRef<HTMLVideoElement>;
+  // @ViewChild('videoElement', { static: false }) videoElement!: ElementRef<HTMLVideoElement>;
 
   constructor(private router: Router) {
-    this.startCamera();
+    // this.startCamera();
   }
 
-  startCamera() {
-    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then((stream) => {
-          this.videoElement.nativeElement.srcObject = stream;
-        })
-        .catch((error) => {
-          console.error('Error accessing camera:', error);
-        });
-    } else {
-      console.error('Camera not supported on this browser.');
-    }
-  }
+  // startCamera() {
+  //   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+  //     navigator.mediaDevices
+  //       .getUserMedia({ video: true })
+  //       .then((stream) => {
+  //         this.videoElement.nativeElement.srcObject = stream;
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error accessing camera:', error);
+  //       });
+  //   } else {
+  //     console.error('Camera not supported on this browser.');
+  //   }
+  // }
 
   logout() {
     localStorage.removeItem('token');
