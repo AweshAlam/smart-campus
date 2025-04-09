@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { StudentService } from '../../../../service/student.service';
 import { ClassScheduleService } from '../../../../service/class-schedule.service';
+import { WebcamImage, WebcamModule } from 'ngx-webcam';
+import { Subject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-student-registration',
   templateUrl: './student-registration.component.html',
   styleUrls: ['./student-registration.component.css'],
   standalone: true,
-  imports: [FormsModule, HttpClientModule, CommonModule]
+  imports: [FormsModule, HttpClientModule, CommonModule, WebcamModule]
 })
 export class StudentRegistrationComponent implements OnInit {
   reg_no: string = '';
@@ -21,9 +23,13 @@ export class StudentRegistrationComponent implements OnInit {
   errorMessage: string = '';
   schedules: any[] = [];
   selectedScheduleIds: string[] = [];
+  photoBase64: string = '';
+
+  private trigger: Subject<void> = new Subject<void>();
 
   constructor(
-    private studentService: StudentService,private classSchedule: ClassScheduleService,
+    private studentService: StudentService,
+    private classSchedule: ClassScheduleService,
     private router: Router
   ) {}
 
@@ -48,13 +54,26 @@ export class StudentRegistrationComponent implements OnInit {
     }
   }
 
+  triggerSnapshot(): void {
+    this.trigger.next();
+  }
+
+  handleImage(webcamImage: WebcamImage): void {
+    this.photoBase64 = webcamImage.imageAsDataUrl;
+  }
+
+  get triggerObservable(): Observable<void> {
+    return this.trigger.asObservable();
+  }
+
   register() {
     const studentData = {
       reg_no: this.reg_no,
       s_name: this.s_name,
       email: this.email,
       mob_no: this.mob_no,
-      scheduleIds: this.selectedScheduleIds
+      scheduleIds: this.selectedScheduleIds,
+      photoBase64: this.photoBase64
     };
 
     this.studentService.registerStudent(studentData).subscribe({

@@ -1,65 +1,48 @@
+<div class="registration-form">
+  <h2>Student Registration</h2>
+  <form (ngSubmit)="register()">
+    <div>
+      <label>Registration Number:</label>
+      <input type="text" [(ngModel)]="reg_no" name="reg_no" required />
+    </div>
+    <div>
+      <label>Name:</label>
+      <input type="text" [(ngModel)]="s_name" name="s_name" required />
+    </div>
+    <div>
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="email" name="email" required />
+    </div>
+    <div>
+      <label>Mobile Number:</label>
+      <input type="text" [(ngModel)]="mob_no" name="mob_no" required />
+    </div>
 
-<!-- <div class="registration-container">
-    <h2>Student Registration</h2>
-    <form (ngSubmit)="register()" #registrationForm="ngForm">
-      <div>
-        <label for="reg_no">Registration Number:</label>
-        <input type="number" id="reg_no" [(ngModel)]="reg_no" name="reg_no" required />
+    <div>
+      <h3>Capture Photo:</h3>
+      <webcam [trigger]="triggerObservable" (imageCapture)="handleImage($event)"></webcam>
+      <button type="button" (click)="triggerSnapshot()">Take Photo</button>
+      <div *ngIf="photoBase64">
+        <h4>Preview:</h4>
+        <img [src]="photoBase64" style="max-width: 300px;" />
       </div>
-      <div>
-        <label for="s_name">Student Name:</label>
-        <input type="text" id="s_name" [(ngModel)]="s_name" name="s_name" required />
-      </div>
-      <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" [(ngModel)]="email" name="email" required />
-      </div>
-      <div>
-        <label for="mob_no">Mobile Number:</label>
-        <input type="text" id="mob_no" [(ngModel)]="mob_no" name="mob_no" required />
-      </div>
-      <button type="submit">Register</button>
-      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-    </form>
-  </div> -->
+    </div>
 
+    <div>
+      <h3>Select Schedules:</h3>
+      <div *ngFor="let schedule of schedules">
+        <label>
+          <input 
+            type="checkbox" 
+            [value]="schedule.id" 
+            (change)="onScheduleChange(schedule.id, $event)"
+          />
+          {{ schedule.subject }} - {{ schedule.day }} ({{ schedule.startTime }} to {{ schedule.endTime }})
+        </label>
+      </div>
+    </div>
 
-  <div class="registration-form">
-    <h2>Student Registration</h2>
-    <form (ngSubmit)="register()">
-      <div>
-        <label>Registration Number:</label>
-        <input type="number" [(ngModel)]="reg_no" name="reg_no" required />
-      </div>
-      <div>
-        <label>Name:</label>
-        <input type="text" [(ngModel)]="s_name" name="s_name" required />
-      </div>
-      <div>
-        <label>Email:</label>
-        <input type="email" [(ngModel)]="email" name="email" required />
-      </div>
-      <div>
-        <label>Mobile Number:</label>
-        <input type="text" [(ngModel)]="mob_no" name="mob_no" required />
-      </div>
-      
-      <div>
-        <h3>Select Schedules:</h3>
-        <div *ngFor="let schedule of schedules">
-          <label>
-            <input 
-              type="checkbox" 
-              [value]="schedule.id" 
-              (change)="onScheduleChange(schedule.id, $event)"
-            />
-            {{ schedule.subject }} - {{ schedule.day }} ({{ schedule.startTime }} to {{ schedule.endTime }})
-          </label>
-        </div>
-      </div>
-  
-      <button type="submit">Register</button>
-      <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-    </form>
-  </div>
-  
+    <button type="submit">Register</button>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </form>
+</div>

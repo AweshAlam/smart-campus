@@ -65,8 +65,45 @@
 }
 
 /* Error Message Styling */
-.registration-form div[ngIf="errorMessage"] {
+.registration-form .error {
   color: #e53e3e;
   margin-top: 15px;
   font-size: 1em;
+}
+
+/* Webcam Section */
+.registration-form webcam {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px 0;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Take Photo Button */
+.registration-form button[type="button"] {
+  margin-top: 10px;
+  background-color: #38a169;
+  color: #fff;
+  padding: 8px 18px;
+  border: none;
+  font-size: 0.95em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.registration-form button[type="button"]:hover {
+  background-color: #48bb78;
+}
+
+/* Photo Preview */
+.registration-form img {
+  margin-top: 15px;
+  border-radius: 8px;
+  max-width: 200px;
+  border: 1px solid #cbd5e0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
