@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { StudentService } from '../../../../service/student.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -7,12 +7,15 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.css'],
-  imports: [CommonModule,FormsModule],
-  standalone: true
+  standalone: true,
+  imports: [CommonModule, FormsModule],
 })
 export class StudentListComponent implements OnInit {
   students: any[] = [];
   editingStudent: any = null;
+  cameraActive: boolean = false;
+
+  @ViewChild('video', { static: false }) videoElement!: ElementRef;
 
   constructor(private studentService: StudentService) {}
 
@@ -28,7 +31,7 @@ export class StudentListComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error fetching student list:', error);
-      }
+      },
     });
   }
 
@@ -38,21 +41,25 @@ export class StudentListComponent implements OnInit {
 
   updateStudent(): void {
     if (this.editingStudent) {
-      this.studentService.updateStudent(this.editingStudent.reg_no, this.editingStudent).subscribe({
-        next: () => {
-          console.log('Student updated successfully');
-          this.editingStudent = null;
-          this.fetchStudents(); 
-        },
-        error: (error) => {
-          console.error('Error updating student:', error);
-        }
-      });
+      console.log('Updating student with data:', this.editingStudent);
+      this.studentService
+        .updateStudent(this.editingStudent.reg_no, this.editingStudent)
+        .subscribe({
+          next: () => {
+            console.log('Student updated successfully');
+            this.editingStudent = null;
+            this.fetchStudents();
+          },
+          error: (error) => {
+            console.error('Error updating student:', error);
+          },
+        });
     }
   }
 
   cancelEdit(): void {
     this.editingStudent = null;
+    this.stopCamera();
   }
 
   deleteStudent(reg_no: string): void {
@@ -63,7 +70,47 @@ export class StudentListComponent implements OnInit {
       },
       error: (error) => {
         console.error(`Error deleting student with ID ${reg_no}:`, error);
-      }
+      },
     });
+  }
+
+  startCamera(): void {
+    this.cameraActive = true;
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then((stream) => {
+        const video = this.videoElement.nativeElement as HTMLVideoElement;
+        video.srcObject = stream;
+        video.play();
+      })
+      .catch((err) => {
+        console.error('Camera error:', err);
+      });
+  }
+
+  stopCamera(): void {
+    this.cameraActive = false;
+    const video = this.videoElement.nativeElement as HTMLVideoElement;
+    const stream = video.srcObject as MediaStream;
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+      video.srcObject = null;
+    }
+  }
+
+  capturePhoto(): void {
+    const video = this.videoElement.nativeElement as HTMLVideoElement;
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      const dataURL = canvas.toDataURL('image/jpeg');
+      this.editingStudent.photoBase64 = dataURL;
+    }
+
+    this.stopCamera();
   }
 }

@@ -3,6 +3,7 @@
   <table border="1">
     <thead>
       <tr>
+        <th>Photo</th>
         <th>Registration No</th>
         <th>Name</th>
         <th>Email</th>
@@ -12,6 +13,17 @@
     </thead>
     <tbody>
       <tr *ngFor="let student of students">
+        <td>
+          <img
+            *ngIf="student.photoBase64"
+            [src]="student.photoBase64"
+            alt="Photo"
+            width="80"
+            height="80"
+            style="border-radius: 8px;"
+          />
+          <span *ngIf="!student.photoBase64">No photo</span>
+        </td>
         <td>{{ student.reg_no }}</td>
         <td>{{ student.s_name }}</td>
         <td>{{ student.email }}</td>
@@ -25,6 +37,7 @@
   </table>
 </div>
 
+<!-- Edit Form -->
 <div *ngIf="editingStudent">
   <h3>Edit Student</h3>
   <form (ngSubmit)="updateStudent()">
@@ -44,6 +57,24 @@
       Mobile No:
       <input [(ngModel)]="editingStudent.mob_no" name="mob_no" required />
     </label>
+
+    <div>
+      <h4>Photo</h4>
+      <video #video width="320" height="240" autoplay *ngIf="cameraActive"></video>
+      <img
+        *ngIf="editingStudent.photoBase64 && !cameraActive"
+        [src]="editingStudent.photoBase64"
+        width="100"
+        height="100"
+        alt="Captured"
+      />
+      <div>
+        <button type="button" (click)="startCamera()">Start Camera</button>
+        <button type="button" (click)="capturePhoto()">Capture Photo</button>
+        <button type="button" (click)="stopCamera()">Stop Camera</button>
+      </div>
+    </div>
+
     <button type="submit">Save</button>
     <button type="button" (click)="cancelEdit()">Cancel</button>
   </form>
